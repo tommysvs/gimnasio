@@ -164,4 +164,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("estado", estado);
         return db.update("tipos_membresia", values, "id_tipo_membresia = ?", new String[]{String.valueOf(id)});
     }
+
+    // Clientes
+    public Cursor getClientes() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        return db.rawQuery("SELECT * FROM clientes ORDER BY nombre ASC", null);
+    }
+
+    public long insertarCliente(String nombre, String apellido, String telefono, String correo, String fechaNac, String genero, int estado) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        ContentValues values = new ContentValues();
+        values.put("nombre", nombre);
+        values.put("apellido", apellido);
+        values.put("telefono", telefono);
+        values.put("correo", correo);
+        values.put("fecha_nacimiento", fechaNac);
+        values.put("genero", genero);
+        values.put("estado", estado);
+        return db.insert("clientes", null, values);
+    }
+
+    public int actualizarCliente(int id, String nombre, String apellido, String telefono, String correo, String fechaNac, String genero, int estado) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        ContentValues values = new ContentValues();
+        values.put("nombre", nombre);
+        values.put("apellido", apellido);
+        values.put("telefono", telefono);
+        values.put("correo", correo);
+        values.put("fecha_nacimiento", fechaNac);
+        values.put("genero", genero);
+        values.put("estado", estado);
+        return db.update("clientes", values, "id_cliente = ?", new String[]{String.valueOf(id)});
+    }
 }

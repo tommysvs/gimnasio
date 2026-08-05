@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvClientFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre y apellido"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/gym_bg_deep" />
+
+            <TextView
+                android:id="@+id/tvClientPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9999-9999"
+                android:textColor="@color/gym_secondary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvClientEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="correo@ejemplo.com"
+                android:textColor="@color/gym_silver"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvClientStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Activo"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="2dp"
+                android:background="@drawable/bg_status_active"
+                android:textColor="@color/white" />
+
+            <ImageButton
+                android:id="@+id/btnEditClient"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_edit"
+                app:tint="@color/gym_primary"
+                android:contentDescription="Editar" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
