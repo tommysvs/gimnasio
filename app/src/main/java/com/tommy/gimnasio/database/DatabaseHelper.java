@@ -192,4 +192,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("estado", estado);
         return db.update("clientes", values, "id_cliente = ?", new String[]{String.valueOf(id)});
     }
+
+    // Pagos
+    public Cursor getPagos() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String query = "SELECT p.*, c.nombre || ' ' || c.apellido as cliente_nombre " +
+                "FROM pagos p " +
+                "INNER JOIN clientes c ON p.id_cliente = c.id_cliente " +
+                "ORDER BY p.fecha_pago DESC";
+        return db.rawQuery(query, null);
+    }
+
+    public long registrarPago(int idCliente, Integer idClienteMembresia, int idMetodo, double monto, String fecha) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        ContentValues values = new ContentValues();
+        values.put("id_cliente", idCliente);
+        if (idClienteMembresia != null) values.put("id_cliente_membresia", idClienteMembresia);
+        values.put("id_metodo_pago", idMetodo);
+        values.put("monto", monto);
+        values.put("fecha_pago", fecha);
+        return db.insert("pagos", null, values);
+    }
+
+    public Cursor getClienteMembresiasActivas(int idCliente) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String query = "SELECT cm.id_cliente_membresia, tm.nombre " +
+                "FROM cliente_membresias cm " +
+                "INNER JOIN tipos_membresia tm ON cm.id_tipo_membresia = tm.id_tipo_membresia " +
+                "WHERE cm.id_cliente = ? AND cm.id_estado_membresia = 1"; // 1 = Activa
+        return db.rawQuery(query, new String[]{String.valueOf(idCliente)});
+    }
 }

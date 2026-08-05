@@ -5,4 +5,9 @@
         <item>Femenino</item>
         <item>Otro</item>
     </string-array>
+    <string-array name="payment_methods">
+        <item>Efectivo</item>
+        <item>Tarjeta</item>
+        <item>Transferencia</item>
+    </string-array>
 </resources>

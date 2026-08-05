@@ -36,7 +36,8 @@ android {
                 "src/main/res-clients",
                 "src/main/res-memberships",
                 "src/main/res-users",
-                "src/main/res-main"
+                "src/main/res-main",
+                "src/main/res-payments"
             )
         }
     }

@@ -20,6 +20,7 @@ import com.tommy.gimnasio.R;
 import com.tommy.gimnasio.fragments.ClientsFragment;
 import com.tommy.gimnasio.fragments.HomeFragment;
 import com.tommy.gimnasio.fragments.MembershipsFragment;
+import com.tommy.gimnasio.fragments.PaymentsFragment;
 import com.tommy.gimnasio.fragments.UsersFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (roleId == 3) {
             menu.findItem(R.id.nav_clients).setVisible(false);
             menu.findItem(R.id.nav_memberships).setVisible(false);
+            menu.findItem(R.id.nav_payments).setVisible(false);
             menu.findItem(R.id.nav_users).setVisible(false);
             menu.findItem(R.id.nav_reports).setVisible(false);
         }
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (roleId == 4) {
             menu.findItem(R.id.nav_clients).setVisible(false);
             menu.findItem(R.id.nav_memberships).setVisible(false);
+            menu.findItem(R.id.nav_payments).setVisible(false);
             menu.findItem(R.id.nav_attendance).setVisible(false);
             menu.findItem(R.id.nav_users).setVisible(false);
             menu.findItem(R.id.nav_reports).setVisible(false);
@@ -115,6 +118,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_memberships) {
             selectedFragment = new MembershipsFragment();
             title = "Membresías";
+        } else if (id == R.id.nav_payments) {
+            selectedFragment = new PaymentsFragment();
+            title = "Pagos";
         } else if (id == R.id.nav_users) {
             selectedFragment = new UsersFragment();
             title = "Usuarios";
