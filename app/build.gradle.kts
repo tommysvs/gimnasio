@@ -27,6 +27,12 @@ android {
             }
         }
     }
+    sourceSets {
+        getByName("main") {
+            assets.srcDirs("src/main/assets", "../db")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
