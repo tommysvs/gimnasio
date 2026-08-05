@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@android:drawable/ic_menu_today"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/nav_clients"
+            android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="Clientes" />
+        <item
+            android:id="@+id/nav_memberships"
+            android:icon="@android:drawable/star_big_on"
+            android:title="Membresías" />
+        <item
+            android:id="@+id/nav_attendance"
+            android:icon="@android:drawable/ic_menu_recent_history"
+            android:title="Asistencia" />
+        <item
+            android:id="@+id/nav_routines"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="Rutinas" />
+    </group>
+
+    <item android:title="Administración">
+        <menu>
+            <item
+                android:id="@+id/nav_users"
+                android:icon="@android:drawable/ic_menu_edit"
+                android:title="Usuarios" />
+            <item
+                android:id="@+id/nav_reports"
+                android:icon="@android:drawable/ic_menu_report_image"
+                android:title="Reportes" />
+        </menu>
+    </item>
+
+    <item android:title="Cuenta">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@android:drawable/ic_lock_power_off"
+                android:title="Cerrar Sesión" />
+        </menu>
+    </item>
+
+</menu>
