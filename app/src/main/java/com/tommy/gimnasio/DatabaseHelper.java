@@ -1,5 +1,6 @@
 package com.tommy.gimnasio;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -61,5 +62,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public Cursor getUsuarios() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String query = "SELECT u.id_usuario, u.nombre, u.usuario, u.correo, u.estado, u.id_rol, r.nombre as rol_nombre " +
+                "FROM usuarios u " +
+                "INNER JOIN roles r ON u.id_rol = r.id_rol " +
+                "ORDER BY u.id_usuario DESC";
+        return db.rawQuery(query, null);
+    }
+
+    public Cursor getRoles() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        return db.rawQuery("SELECT id_rol, nombre FROM roles", null);
+    }
+
+    public long insertarUsuario(int idRol, String nombre, String correo, String usuario, String password, int estado) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        ContentValues values = new ContentValues();
+        values.put("id_rol", idRol);
+        values.put("nombre", nombre);
+        values.put("correo", correo);
+        values.put("usuario", usuario);
+        values.put("password_hash", password);
+        values.put("estado", estado);
+        return db.insert("usuarios", null, values);
+    }
+
+    public int actualizarUsuario(int idUsuario, int idRol, String nombre, String correo, String usuario, String password, int estado) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        ContentValues values = new ContentValues();
+        values.put("id_rol", idRol);
+        values.put("nombre", nombre);
+        values.put("correo", correo);
+        values.put("usuario", usuario);
+        if (password != null && !password.isEmpty()) {
+            values.put("password_hash", password);
+        }
+        values.put("estado", estado);
+        return db.update("usuarios", values, "id_usuario = ?", new String[]{String.valueOf(idUsuario)});
+    }
+
+    public int cambiarEstadoUsuario(int idUsuario, int nuevoEstado) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        ContentValues values = new ContentValues();
+        values.put("estado", nuevoEstado);
+        return db.update("usuarios", values, "id_usuario = ?", new String[]{String.valueOf(idUsuario)});
     }
 }
