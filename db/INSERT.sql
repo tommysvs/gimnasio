@@ -55,11 +55,11 @@ VALUES
 -- USUARIOS
 -- =====================================
 INSERT INTO usuarios
-(id_rol, nombre, correo, password_hash)
+(id_rol, usuario, nombre, correo, password_hash)
 VALUES
-(1, 'Administrador General', 'admin@gym.com', '12345'),
-(2, 'Maria Gónzales', 'recepcion@gym.com', '12345'),
-(3, 'Carlos Mejía', 'trainer@gym.com', '12345');
+(1, 'admin', 'Administrador General', 'admin@gym.com', '12345'),
+(2, 'mgonzales', 'Maria Gónzales', 'recepcion@gym.com', '12345'),
+(3, 'cmejia', 'Carlos Mejía', 'trainer@gym.com', '12345');
 
 -- =====================================
 -- CLIENTES

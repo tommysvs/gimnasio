@@ -56,6 +56,7 @@ CREATE TABLE grupos_musculares (
 CREATE TABLE usuarios (
     id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
     id_rol INTEGER NOT NULL,
+    usuario TEXT UNIQUE NOT NULL,
     nombre TEXT NOT NULL,
     correo TEXT UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
