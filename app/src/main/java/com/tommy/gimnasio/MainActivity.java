@@ -104,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_home) {
             selectedFragment = new HomeFragment();
             title = "Inicio";
+        } else if (id == R.id.nav_memberships) {
+            selectedFragment = new MembershipsFragment();
+            title = "Membresías";
         } else if (id == R.id.nav_users) {
             selectedFragment = new UsersFragment();
             title = "Usuarios";
