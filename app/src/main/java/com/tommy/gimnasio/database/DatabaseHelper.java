@@ -222,4 +222,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "WHERE cm.id_cliente = ? AND cm.id_estado_membresia = 1"; // 1 = Activa
         return db.rawQuery(query, new String[]{String.valueOf(idCliente)});
     }
+
+    // Asistencias
+    public Cursor getAsistenciasHoy() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String query = "SELECT a.id_asistencia, a.fecha, c.nombre || ' ' || c.apellido as cliente_nombre " +
+                "FROM asistencias a " +
+                "INNER JOIN clientes c ON a.id_cliente = c.id_cliente " +
+                "WHERE date(a.fecha) = date('now', 'localtime') " +
+                "ORDER BY a.fecha DESC";
+        return db.rawQuery(query, null);
+    }
+
+    public boolean tieneMembresiaActiva(int idCliente) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String query = "SELECT COUNT(*) FROM cliente_membresias " +
+                "WHERE id_cliente = ? AND id_estado_membresia = 1 " +
+                "AND date('now', 'localtime') BETWEEN date(fecha_inicio) AND date(fecha_fin)";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idCliente)});
+        boolean activa = false;
+        if (cursor.moveToFirst()) {
+            activa = cursor.getInt(0) > 0;
+        }
+        cursor.close();
+        return activa;
+    }
+
+    public long registrarAsistencia(int idCliente) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        ContentValues values = new ContentValues();
+        values.put("id_cliente", idCliente);
+        values.put("fecha", new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(new java.util.Date()));
+        return db.insert("asistencias", null, values);
+    }
 }

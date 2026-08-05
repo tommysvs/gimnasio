@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
 import com.tommy.gimnasio.R;
+import com.tommy.gimnasio.fragments.AttendanceFragment;
 import com.tommy.gimnasio.fragments.ClientsFragment;
 import com.tommy.gimnasio.fragments.HomeFragment;
 import com.tommy.gimnasio.fragments.MembershipsFragment;
@@ -118,6 +119,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_memberships) {
             selectedFragment = new MembershipsFragment();
             title = "Membresías";
+        } else if (id == R.id.nav_attendance) {
+            selectedFragment = new AttendanceFragment();
+            title = "Asistencias";
         } else if (id == R.id.nav_payments) {
             selectedFragment = new PaymentsFragment();
             title = "Pagos";

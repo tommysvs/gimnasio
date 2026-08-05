@@ -10,6 +10,7 @@
         android:padding="20dp">
 
         <TextView
+            android:id="@+id/tvDialogTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Registrar pago"
@@ -32,6 +33,7 @@
             android:background="@android:drawable/btn_dropdown" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPayAmount"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,6 +47,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:id="@+id/tvPayMethodLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Método de pago"
