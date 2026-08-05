@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.card.MaterialCardView;
 import com.tommy.gimnasio.R;
+import com.tommy.gimnasio.activities.MainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,9 +37,29 @@ public class HomeFragment extends Fragment {
         cardPayments = view.findViewById(R.id.cardPayments);
 
         setupHeader();
+        applyRolePermissions();
         setupShortcuts();
 
         return view;
+    }
+
+    private void applyRolePermissions() {
+        if (getActivity() == null || getActivity().getIntent() == null) return;
+        
+        int roleId = getActivity().getIntent().getIntExtra("ROLE_ID", -1);
+
+        // Entrenador
+        if (roleId == 3) {
+            cardNewClient.setVisibility(View.GONE);
+            cardPayments.setVisibility(View.GONE);
+        }
+
+        // Cliente
+        if (roleId == 4) {
+            cardAttendance.setVisibility(View.GONE);
+            cardNewClient.setVisibility(View.GONE);
+            cardPayments.setVisibility(View.GONE);
+        }
     }
 
     private void setupHeader() {
@@ -54,16 +75,15 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupShortcuts() {
-        cardAttendance.setOnClickListener(v -> 
-            Toast.makeText(getContext(), "Ir a Asistencia", Toast.LENGTH_SHORT).show());
-        
-        cardNewClient.setOnClickListener(v -> 
-            Toast.makeText(getContext(), "Ir a Nuevo Cliente", Toast.LENGTH_SHORT).show());
-            
-        cardRoutines.setOnClickListener(v -> 
-            Toast.makeText(getContext(), "Ir a Rutinas", Toast.LENGTH_SHORT).show());
-            
-        cardPayments.setOnClickListener(v -> 
-            Toast.makeText(getContext(), "Ir a Pagos", Toast.LENGTH_SHORT).show());
+        cardAttendance.setOnClickListener(v -> navigateTo(R.id.nav_attendance));
+        cardNewClient.setOnClickListener(v -> navigateTo(R.id.nav_clients));
+        cardRoutines.setOnClickListener(v -> navigateTo(R.id.nav_routines));
+        cardPayments.setOnClickListener(v -> navigateTo(R.id.nav_payments));
+    }
+
+    private void navigateTo(int menuId) {
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).handleNavigation(menuId);
+        }
     }
 }

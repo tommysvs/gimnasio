@@ -106,10 +106,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return handleNavigation(item.getItemId());
+    }
+
+    public boolean handleNavigation(int id) {
         Fragment selectedFragment = null;
         String title = "Inicio";
-
-        int id = item.getItemId();
 
         if (id == R.id.nav_home) {
             selectedFragment = new HomeFragment();
@@ -135,8 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_logout) {
             logout();
             return true;
-        } else {
-            Toast.makeText(this, "Sección en desarrollo", Toast.LENGTH_SHORT).show();
         }
 
         if (selectedFragment != null) {
@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (getSupportActionBar() != null) {
                 getSupportActionBar().setTitle(title);
             }
+            navigationView.setCheckedItem(id);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
