@@ -23,6 +23,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@android:color/white"
-        android:contentDescription="Registrar Asistencia" />
+        android:contentDescription="Registrar asistencia" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
