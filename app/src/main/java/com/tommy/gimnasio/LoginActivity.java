@@ -31,9 +31,10 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(v -> handleLogin());
 
-        tvForgotPassword.setOnClickListener(v -> 
-            Toast.makeText(this, "Funcionalidad de recuperación en desarrollo", Toast.LENGTH_SHORT).show()
-        );
+        tvForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void handleLogin() {
@@ -70,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                 cursor.close();
             }
         } else {
-            Toast.makeText(this, "Credenciales incorrectas o usuario inactivo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -64,6 +64,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean verificarCorreo(String correo) {
+        try {
+            SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+            Cursor cursor = db.rawQuery("SELECT id_usuario FROM usuarios WHERE correo = ? AND estado = 1", new String[]{correo});
+            boolean existe = cursor.getCount() > 0;
+            cursor.close();
+            return existe;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean actualizarPassword(String correo, String nuevaPassword) {
+        try {
+            SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+            ContentValues values = new ContentValues();
+            values.put("password_hash", nuevaPassword);
+            int resultado = db.update("usuarios", values, "correo = ?", new String[]{correo});
+            return resultado > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public Cursor getUsuarios() {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
         String query = "SELECT u.id_usuario, u.nombre, u.usuario, u.correo, u.estado, u.id_rol, r.nombre as rol_nombre " +
