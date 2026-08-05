@@ -310,4 +310,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("descanso_segundos", descansoSegundos);
         return db.insert("rutina_ejercicios", null, values);
     }
+
+    // Reportes
+    public int getCountMembresiasActivas() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String query = "SELECT COUNT(*) FROM cliente_membresias WHERE id_estado_membresia = 1 " +
+                "AND date('now', 'localtime') BETWEEN date(fecha_inicio) AND date(fecha_fin)";
+        Cursor cursor = db.rawQuery(query, null);
+        int count = 0;
+        if (cursor.moveToFirst()) count = cursor.getInt(0);
+        cursor.close();
+        return count;
+    }
+
+    public double getIngresosMesActual() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String currentMonth = new java.text.SimpleDateFormat("yyyy-MM", java.util.Locale.getDefault()).format(new java.util.Date());
+        String query = "SELECT SUM(monto) FROM pagos WHERE strftime('%Y-%m', fecha_pago) = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{currentMonth});
+        double sum = 0;
+        if (cursor.moveToFirst()) sum = cursor.getDouble(0);
+        cursor.close();
+        return sum;
+    }
+
+    public Cursor getReporteAsistencia() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String query = "SELECT c.nombre || ' ' || c.apellido as cliente, COUNT(a.id_asistencia) as total " +
+                "FROM clientes c " +
+                "LEFT JOIN asistencias a ON c.id_cliente = a.id_cliente " +
+                "GROUP BY c.id_cliente " +
+                "ORDER BY total DESC";
+        return db.rawQuery(query, null);
+    }
 }

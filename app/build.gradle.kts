@@ -35,7 +35,8 @@ android {
                 "src/main/res-main",
                 "src/main/res-payments",
                 "src/main/res-attendance",
-                "src/main/res-routines"
+                "src/main/res-routines",
+                "src/main/res-reports"
             )
         }
     }

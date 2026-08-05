@@ -23,6 +23,7 @@ import com.tommy.gimnasio.fragments.HomeFragment;
 import com.tommy.gimnasio.fragments.MembershipsFragment;
 import com.tommy.gimnasio.fragments.PaymentsFragment;
 import com.tommy.gimnasio.fragments.RoutinesFragment;
+import com.tommy.gimnasio.fragments.ReportsFragment;
 import com.tommy.gimnasio.fragments.UsersFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -134,6 +135,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_users) {
             selectedFragment = new UsersFragment();
             title = "Usuarios";
+        } else if (id == R.id.nav_reports) {
+            selectedFragment = new ReportsFragment();
+            title = "Reportes";
         } else if (id == R.id.nav_logout) {
             logout();
             return true;
