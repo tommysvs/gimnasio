@@ -14,7 +14,7 @@
             android:id="@+id/tvDialogTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gestión de Usuario"
+            android:text="Gestión de usuario"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="20dp" />
@@ -23,7 +23,7 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre Completo"
+            android:hint="Nombre completo"
             android:layout_marginBottom="12dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etName"
@@ -73,7 +73,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rol del Usuario"
+            android:text="Rol del usuario"
             android:textSize="14sp"
             android:layout_marginBottom="4dp" />
         <Spinner
@@ -87,7 +87,7 @@
             android:id="@+id/swStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Usuario Activo"
+            android:text="Usuario activo"
             android:checked="true"
             android:layout_marginBottom="24dp" />
 
