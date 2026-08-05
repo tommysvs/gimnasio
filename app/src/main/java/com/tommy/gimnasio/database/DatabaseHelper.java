@@ -255,4 +255,59 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("fecha", new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(new java.util.Date()));
         return db.insert("asistencias", null, values);
     }
+
+    // Rutinas
+    public Cursor getRutinas() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String query = "SELECT r.*, u.nombre as entrenador_nombre " +
+                "FROM rutinas r " +
+                "LEFT JOIN entrenadores e ON r.id_entrenador = e.id_entrenador " +
+                "LEFT JOIN usuarios u ON e.id_usuario = u.id_usuario " +
+                "ORDER BY r.nombre ASC";
+        return db.rawQuery(query, null);
+    }
+
+    public long insertarRutina(int idEntrenador, String nombre, String descripcion) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        ContentValues values = new ContentValues();
+        values.put("id_entrenador", idEntrenador);
+        values.put("nombre", nombre);
+        values.put("descripcion", descripcion);
+        return db.insert("rutinas", null, values);
+    }
+
+    public int actualizarRutina(int idRutina, int idEntrenador, String nombre, String descripcion) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        ContentValues values = new ContentValues();
+        values.put("id_entrenador", idEntrenador);
+        values.put("nombre", nombre);
+        values.put("descripcion", descripcion);
+        return db.update("rutinas", values, "id_rutina = ?", new String[]{String.valueOf(idRutina)});
+    }
+
+    public Cursor getEjercicios() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        return db.rawQuery("SELECT * FROM ejercicios ORDER BY nombre ASC", null);
+    }
+
+    public Cursor getDetalleRutina(int idRutina) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String query = "SELECT re.*, e.nombre as ejercicio_nombre " +
+                "FROM rutina_ejercicios re " +
+                "INNER JOIN ejercicios e ON re.id_ejercicio = e.id_ejercicio " +
+                "WHERE re.id_rutina = ?";
+        return db.rawQuery(query, new String[]{String.valueOf(idRutina)});
+    }
+
+    public long agregarEjercicioARutina(int idRutina, int idEjercicio, int series, int reps, double peso, int descansoSegundos) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        ContentValues values = new ContentValues();
+        values.put("id_rutina", idRutina);
+        values.put("id_ejercicio", idEjercicio);
+        values.put("series", series);
+        values.put("repeticiones", reps);
+        values.put("peso", peso);
+        values.put("descanso_segundos", descansoSegundos);
+        return db.insert("rutina_ejercicios", null, values);
+    }
 }
