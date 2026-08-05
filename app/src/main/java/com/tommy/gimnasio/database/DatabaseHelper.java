@@ -51,6 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
+    // Login
     public Cursor validarUsuario(String usuario, String password) {
         try {
             SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
@@ -88,6 +89,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Inicio
+    public int getCountAsistenciasHoy() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String query = "SELECT COUNT(*) FROM asistencias WHERE date(fecha) = date('now', 'localtime')";
+        Cursor cursor = db.rawQuery(query, null);
+        int count = 0;
+        if (cursor.moveToFirst()) count = cursor.getInt(0);
+        cursor.close();
+        return count;
+    }
+
+    public double getIngresosHoy() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String query = "SELECT SUM(monto) FROM pagos WHERE date(fecha_pago) = date('now', 'localtime')";
+        Cursor cursor = db.rawQuery(query, null);
+        double sum = 0;
+        if (cursor.moveToFirst()) sum = cursor.getDouble(0);
+        cursor.close();
+        return sum;
+    }
+
+    public int getCountNuevosClientesHoy() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        String query = "SELECT COUNT(*) FROM clientes WHERE date(fecha_registro) = date('now', 'localtime')";
+        Cursor cursor = db.rawQuery(query, null);
+        int count = 0;
+        if (cursor.moveToFirst()) count = cursor.getInt(0);
+        cursor.close();
+        return count;
+    }
+
+    // Usuarios
     public Cursor getUsuarios() {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
         String query = "SELECT u.id_usuario, u.nombre, u.usuario, u.correo, u.estado, u.id_rol, r.nombre as rol_nombre " +
@@ -135,6 +168,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.update("usuarios", values, "id_usuario = ?", new String[]{String.valueOf(idUsuario)});
     }
 
+    // Membresias
     public Cursor getTiposMembresia() {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
         return db.rawQuery("SELECT * FROM tipos_membresia ORDER BY precio ASC", null);
@@ -162,6 +196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.update("tipos_membresia", values, "id_tipo_membresia = ?", new String[]{String.valueOf(id)});
     }
 
+    //Clientes
     public Cursor getClientes() {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
         return db.rawQuery("SELECT * FROM clientes ORDER BY nombre ASC", null);
