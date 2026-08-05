@@ -70,6 +70,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int roleId = getIntent().getIntExtra("ROLE_ID", -1);
         android.view.Menu menu = navigationView.getMenu();
 
+        // Recepcionista
+        if (roleId == 2) {
+            menu.findItem(R.id.nav_users).setVisible(false);
+            menu.findItem(R.id.nav_reports).setVisible(false);
+        }
+
+        // Entrenador
         if (roleId == 3) {
             menu.findItem(R.id.nav_clients).setVisible(false);
             menu.findItem(R.id.nav_memberships).setVisible(false);
@@ -77,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             menu.findItem(R.id.nav_reports).setVisible(false);
         }
         
+        // Cliente
         if (roleId == 4) {
             menu.findItem(R.id.nav_clients).setVisible(false);
             menu.findItem(R.id.nav_memberships).setVisible(false);
@@ -96,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_home) {
             selectedFragment = new HomeFragment();
             title = "Inicio";
+        } else if (id == R.id.nav_users) {
+            selectedFragment = new UsersFragment();
+            title = "Usuarios";
         } else if (id == R.id.nav_logout) {
             logout();
             return true;
