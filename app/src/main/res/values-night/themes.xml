@@ -1,7 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.Gimnasio" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/gym_primary</item>
+        <item name="colorOnPrimary">@color/gym_light_gray</item>
+
+        <item name="colorSecondary">@color/gym_secondary</item>
+
+        <item name="android:windowBackground">@color/gym_bg_deep</item>
+        <item name="colorSurface">@color/gym_surface_dark</item>
+        <item name="colorOnSurface">@color/gym_light_gray</item>
+        <item name="colorSurfaceVariant">@color/gym_secondary</item>
+
+        <item name="android:statusBarColor">@color/gym_bg_deep</item>
     </style>
 </resources>

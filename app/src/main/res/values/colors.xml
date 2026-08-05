@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="gym_bg_deep">#06141B</color>
+    <color name="gym_surface_dark">#11212D</color>
+    <color name="gym_primary">#253745</color>
+    <color name="gym_secondary">#4A5C6A</color>
+    <color name="gym_silver">#9BABAB</color>
+    <color name="gym_light_gray">#CCD0CF</color>
 </resources>

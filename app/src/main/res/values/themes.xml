@@ -1,7 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.Gimnasio" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/gym_primary</item>
+        <item name="colorOnPrimary">@color/gym_light_gray</item>
+        <item name="colorPrimaryContainer">@color/gym_surface_dark</item>
+        <item name="colorOnPrimaryContainer">@color/gym_light_gray</item>
+
+        <item name="colorSecondary">@color/gym_secondary</item>
+        <item name="colorOnSecondary">@color/gym_bg_deep</item>
+
+        <item name="android:windowBackground">@color/gym_light_gray</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/gym_bg_deep</item>
+
+        <item name="android:statusBarColor">@color/gym_bg_deep</item>
     </style>
 
     <style name="Theme.Gimnasio" parent="Base.Theme.Gimnasio" />
