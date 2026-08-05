@@ -1,7 +1,6 @@
-package com.tommy.gimnasio;
+package com.tommy.gimnasio.fragments;
 
 import android.app.AlertDialog;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.TextInputEditText;
+import com.tommy.gimnasio.R;
+import com.tommy.gimnasio.adapters.MembershipTypeAdapter;
+import com.tommy.gimnasio.database.DatabaseHelper;
 
 public class MembershipsFragment extends Fragment {
 

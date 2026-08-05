@@ -30,6 +30,14 @@ android {
     sourceSets {
         getByName("main") {
             assets.srcDirs("src/main/assets", "../db")
+            res.srcDirs(
+                "src/main/res",
+                "src/main/res-auth",
+                "src/main/res-clients",
+                "src/main/res-memberships",
+                "src/main/res-users",
+                "src/main/res-main"
+            )
         }
     }
 

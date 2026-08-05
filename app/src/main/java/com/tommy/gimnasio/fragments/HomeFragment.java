@@ -1,4 +1,4 @@
-package com.tommy.gimnasio;
+package com.tommy.gimnasio.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.card.MaterialCardView;
+import com.tommy.gimnasio.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

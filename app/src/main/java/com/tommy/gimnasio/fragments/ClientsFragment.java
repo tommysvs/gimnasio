@@ -1,4 +1,4 @@
-package com.tommy.gimnasio;
+package com.tommy.gimnasio.fragments;
 
 import android.app.AlertDialog;
 import android.database.Cursor;
@@ -20,6 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.TextInputEditText;
+import com.tommy.gimnasio.R;
+import com.tommy.gimnasio.adapters.ClientAdapter;
+import com.tommy.gimnasio.database.DatabaseHelper;
 
 public class ClientsFragment extends Fragment {
 
@@ -67,9 +70,12 @@ public class ClientsFragment extends Fragment {
             etBirth.setText(fechaNac);
             swStatus.setChecked(estado == 1);
             
+            // Set gender in spinner
             ArrayAdapter<CharSequence> genderAdapter = (ArrayAdapter<CharSequence>) spnGender.getAdapter();
-            int pos = genderAdapter.getPosition(genero);
-            if (pos != -1) spnGender.setSelection(pos);
+            if (genderAdapter != null) {
+                int pos = genderAdapter.getPosition(genero);
+                if (pos != -1) spnGender.setSelection(pos);
+            }
         }
 
         btnSave.setOnClickListener(v -> {

@@ -1,4 +1,4 @@
-package com.tommy.gimnasio;
+package com.tommy.gimnasio.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.tommy.gimnasio.R;
+import com.tommy.gimnasio.database.DatabaseHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -71,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 cursor.close();
             }
         } else {
-            Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Credenciales incorrectas o usuario inactivo", Toast.LENGTH_SHORT).show();
         }
     }
 }

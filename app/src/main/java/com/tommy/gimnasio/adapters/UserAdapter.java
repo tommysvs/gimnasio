@@ -1,4 +1,4 @@
-package com.tommy.gimnasio;
+package com.tommy.gimnasio.adapters;
 
 import android.database.Cursor;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.tommy.gimnasio.R;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
@@ -69,7 +70,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         notifyDataSetChanged();
     }
 
-    static class UserViewHolder extends RecyclerView.ViewHolder {
+    public static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView tvUserName, tvUserLogin, tvUserRole, tvStatus;
         ImageButton btnEdit;
 

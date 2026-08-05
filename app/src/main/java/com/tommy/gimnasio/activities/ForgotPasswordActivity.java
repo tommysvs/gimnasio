@@ -1,4 +1,4 @@
-package com.tommy.gimnasio;
+package com.tommy.gimnasio.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +9,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.tommy.gimnasio.R;
+import com.tommy.gimnasio.database.DatabaseHelper;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 

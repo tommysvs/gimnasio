@@ -1,4 +1,4 @@
-package com.tommy.gimnasio;
+package com.tommy.gimnasio.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tommy.gimnasio.R;
+import com.tommy.gimnasio.fragments.ClientsFragment;
+import com.tommy.gimnasio.fragments.HomeFragment;
+import com.tommy.gimnasio.fragments.MembershipsFragment;
+import com.tommy.gimnasio.fragments.UsersFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

@@ -1,4 +1,4 @@
-package com.tommy.gimnasio;
+package com.tommy.gimnasio.fragments;
 
 import android.app.AlertDialog;
 import android.database.Cursor;
@@ -20,6 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.TextInputEditText;
+import com.tommy.gimnasio.R;
+import com.tommy.gimnasio.adapters.UserAdapter;
+import com.tommy.gimnasio.database.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +66,7 @@ public class UsersFragment extends Fragment {
         Button btnSave = dialogView.findViewById(R.id.btnSave);
         Button btnCancel = dialogView.findViewById(R.id.btnCancel);
 
+        // Llenar roles
         Cursor rolesCursor = dbHelper.getRoles();
         List<String> rolesList = new ArrayList<>();
         List<Integer> rolesIds = new ArrayList<>();
@@ -75,12 +79,13 @@ public class UsersFragment extends Fragment {
         roleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnRole.setAdapter(roleAdapter);
 
+        // Si es edición, cargar datos
         if (idUsuario != -1) {
             etName.setText(nombre);
             etEmail.setText(correo);
             etUsername.setText(usuario);
             swStatus.setChecked(estado == 1);
-
+            // Seleccionar rol en spinner
             int rolePos = rolesIds.indexOf(idRol);
             if (rolePos != -1) spnRole.setSelection(rolePos);
         }
