@@ -45,6 +45,16 @@
                 android:text="correo@ejemplo.com"
                 android:textColor="@color/gym_silver"
                 android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvClientMembership"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Membresía: Sin membresía"
+                android:textColor="@color/gym_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginTop="2dp" />
         </LinearLayout>
 
         <LinearLayout

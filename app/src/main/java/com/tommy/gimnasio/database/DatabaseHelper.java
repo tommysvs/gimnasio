@@ -199,7 +199,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Clientes
     public Cursor getClientes() {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
-        return db.rawQuery("SELECT * FROM clientes ORDER BY nombre ASC", null);
+        String query = "SELECT c.*, tm.nombre as membresia_nombre " +
+                "FROM clientes c " +
+                "LEFT JOIN cliente_membresias cm ON c.id_cliente = cm.id_cliente " +
+                "AND cm.id_estado_membresia = 1 " +
+                "AND date('now', 'localtime') BETWEEN date(cm.fecha_inicio) AND date(cm.fecha_fin) " +
+                "LEFT JOIN tipos_membresia tm ON cm.id_tipo_membresia = tm.id_tipo_membresia " +
+                "ORDER BY c.nombre ASC";
+        return db.rawQuery(query, null);
     }
 
     public long insertarCliente(String nombre, String apellido, String telefono, String correo, String fechaNac, String genero, int estado) {

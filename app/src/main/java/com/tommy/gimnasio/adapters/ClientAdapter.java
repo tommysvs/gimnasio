@@ -43,10 +43,15 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ClientView
             String fechaNac = cursor.getString(cursor.getColumnIndexOrThrow("fecha_nacimiento"));
             String genero = cursor.getString(cursor.getColumnIndexOrThrow("genero"));
             int estado = cursor.getInt(cursor.getColumnIndexOrThrow("estado"));
+            String membresia = cursor.getString(cursor.getColumnIndexOrThrow("membresia_nombre"));
+            if (membresia == null || membresia.trim().isEmpty()) {
+                membresia = "Sin membresía";
+            }
 
             holder.tvFullName.setText(nombre + " " + apellido);
             holder.tvPhone.setText(telefono);
             holder.tvEmail.setText(correo);
+            holder.tvMembership.setText("Membresía: " + membresia);
             
             if (estado == 1) {
                 holder.tvStatus.setText("Activo");
@@ -72,7 +77,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ClientView
     }
 
     public static class ClientViewHolder extends RecyclerView.ViewHolder {
-        TextView tvFullName, tvPhone, tvEmail, tvStatus;
+        TextView tvFullName, tvPhone, tvEmail, tvMembership, tvStatus;
         ImageButton btnEdit;
 
         public ClientViewHolder(@NonNull View itemView) {
@@ -80,6 +85,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ClientView
             tvFullName = itemView.findViewById(R.id.tvClientFullName);
             tvPhone = itemView.findViewById(R.id.tvClientPhone);
             tvEmail = itemView.findViewById(R.id.tvClientEmail);
+            tvMembership = itemView.findViewById(R.id.tvClientMembership);
             tvStatus = itemView.findViewById(R.id.tvClientStatus);
             btnEdit = itemView.findViewById(R.id.btnEditClient);
         }
