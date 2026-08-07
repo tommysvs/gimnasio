@@ -2,4 +2,6 @@
     <string name="app_name">Gimnasio</string>
     <string name="navigation_drawer_open">Abrir menú de navegación</string>
     <string name="navigation_drawer_close">Cerrar menú de navegación</string>
+    <string name="initial_membership">Membresía inicial</string>
+    <string name="no_membership">Sin membresía</string>
 </resources>

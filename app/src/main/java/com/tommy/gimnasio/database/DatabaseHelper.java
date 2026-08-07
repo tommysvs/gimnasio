@@ -199,7 +199,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Clientes
     public Cursor getClientes() {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
-        String query = "SELECT c.*, tm.nombre as membresia_nombre " +
+        String query = "SELECT c.*, tm.nombre as membresia_nombre, tm.id_tipo_membresia as id_tipo_membresia " +
                 "FROM clientes c " +
                 "LEFT JOIN cliente_membresias cm ON c.id_cliente = cm.id_cliente " +
                 "AND cm.id_estado_membresia = 1 " +
@@ -233,6 +233,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("genero", genero);
         values.put("estado", estado);
         return db.update("clientes", values, "id_cliente = ?", new String[]{String.valueOf(id)});
+    }
+
+    public long asignarMembresia(int idCliente, int idTipoMembresia, int dias) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        
+        // Desactivar membresías activas previas
+        ContentValues deactivateValues = new ContentValues();
+        deactivateValues.put("id_estado_membresia", 0); // 0 = Inactiva/Vencida
+        db.update("cliente_membresias", deactivateValues, "id_cliente = ? AND id_estado_membresia = 1", new String[]{String.valueOf(idCliente)});
+
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        String fechaInicio = sdf.format(cal.getTime());
+        
+        cal.add(java.util.Calendar.DAY_OF_YEAR, dias);
+        String fechaFin = sdf.format(cal.getTime());
+
+        ContentValues values = new ContentValues();
+        values.put("id_cliente", idCliente);
+        values.put("id_tipo_membresia", idTipoMembresia);
+        values.put("fecha_inicio", fechaInicio);
+        values.put("fecha_fin", fechaFin);
+        values.put("id_estado_membresia", 1); // 1 = Activa
+        
+        return db.insert("cliente_membresias", null, values);
+    }
+
+    public void desactivarMembresiasActivas(int idCliente) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        ContentValues deactivateValues = new ContentValues();
+        deactivateValues.put("id_estado_membresia", 0); // 0 = Inactiva
+        db.update("cliente_membresias", deactivateValues, "id_cliente = ? AND id_estado_membresia = 1", new String[]{String.valueOf(idCliente)});
     }
 
     // Pagos

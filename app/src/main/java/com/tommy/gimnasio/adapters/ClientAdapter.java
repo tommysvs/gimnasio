@@ -17,7 +17,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ClientView
     private final OnClientClickListener listener;
 
     public interface OnClientClickListener {
-        void onEditClick(int id, String nombre, String apellido, String telefono, String correo, String fechaNac, String genero, int estado);
+        void onEditClick(int id, String nombre, String apellido, String telefono, String correo, String fechaNac, String genero, int estado, int idTipoMembresia);
     }
 
     public ClientAdapter(Cursor cursor, OnClientClickListener listener) {
@@ -43,6 +43,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ClientView
             String fechaNac = cursor.getString(cursor.getColumnIndexOrThrow("fecha_nacimiento"));
             String genero = cursor.getString(cursor.getColumnIndexOrThrow("genero"));
             int estado = cursor.getInt(cursor.getColumnIndexOrThrow("estado"));
+            int idTipoMembresia = cursor.isNull(cursor.getColumnIndexOrThrow("id_tipo_membresia")) ? -1 : cursor.getInt(cursor.getColumnIndexOrThrow("id_tipo_membresia"));
             String membresia = cursor.getString(cursor.getColumnIndexOrThrow("membresia_nombre"));
             if (membresia == null || membresia.trim().isEmpty()) {
                 membresia = "Sin membresía";
@@ -61,7 +62,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ClientView
                 holder.tvStatus.setBackgroundResource(R.drawable.bg_status_inactive);
             }
 
-            holder.btnEdit.setOnClickListener(v -> listener.onEditClick(id, nombre, apellido, telefono, correo, fechaNac, genero, estado));
+            holder.btnEdit.setOnClickListener(v -> listener.onEditClick(id, nombre, apellido, telefono, correo, fechaNac, genero, estado, idTipoMembresia));
         }
     }
 

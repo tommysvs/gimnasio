@@ -95,6 +95,19 @@
             android:background="@android:drawable/btn_dropdown"
             android:entries="@array/genders" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/initial_membership"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+        <Spinner
+            android:id="@+id/spnClientMembership"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:drawable/btn_dropdown" />
+
         <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/swClientStatus"
             android:layout_width="match_parent"
